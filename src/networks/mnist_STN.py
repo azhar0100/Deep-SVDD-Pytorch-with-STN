@@ -4,7 +4,7 @@ import torch.nn.functional as F
 
 from base.base_net import BaseNet
 
-class MNIST_STN_CNN(nn.Module):
+class MNIST_STN(BaseNet):
     def __init__(self):
         super().__init__()
 
@@ -62,7 +62,7 @@ class MNIST_STN_CNN(nn.Module):
         return x
 
 
-class MNIST_STN_CNN_Autoencoder(nn.Module):
+class MNIST_STN_Autoencoder(BaseNet):
     def __init__(self):
         super().__init__()
 
@@ -166,6 +166,6 @@ class MNIST_STN_CNN_Autoencoder(nn.Module):
         x = F.interpolate(F.leaky_relu(self.bn4(x)), scale_factor=2)
         x = self.deconv3(x)
         x = torch.sigmoid(x)
-        x = stn_inv(x)
+        x = self.stn_inv(x)
         return x
         
